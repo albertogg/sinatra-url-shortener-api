@@ -8,7 +8,7 @@ require 'dotenv'
 Dotenv.load
 
 require 'sinatra/base'
-require 'sinatra/reloader' if development?
+require 'sinatra/reloader' if development? # sinatra-contrib
 
 module Shortened
   class App < Sinatra::Base
