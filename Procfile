@@ -1,1 +1,1 @@
-web: rackup -p 3000 -E $RACK_ENV
+web: bundle exec rackup -p 3000 -E $RACK_ENV
