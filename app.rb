@@ -4,6 +4,9 @@ require 'bundler'
 Bundler.require
 $: << File.expand_path('../', __FILE__)
 
+require 'dotenv'
+Dotenv.load
+
 require 'sinatra/base'
 require 'sinatra/reloader' if development?
 
