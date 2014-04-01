@@ -38,7 +38,7 @@ module Shortened
 
       request.body.rewind
       json_req = JSON.parse(request.body.read)
-      link = json_req['link'].map { |links| Link.create_new_link(links) }
+      link = json_req['links'].map { |links| Link.create_new_link(links) }
 
       Link.transaction do
         link.each(&:save!).to_json
