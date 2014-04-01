@@ -8,10 +8,10 @@ require 'dotenv'
 Dotenv.load
 
 require 'sinatra/base'
-require 'sinatra/activerecord'
 require 'sinatra/reloader' if development? # sinatra-contrib
+require 'sinatra/activerecord'
 
-require 'app/models'
+require 'app/models/link'
 
 module Shortened
   class App < Sinatra::Base
@@ -29,7 +29,20 @@ module Shortened
     end
 
     get '/' do
-      'Hello, World!!'
+      @link = Link.all
+      @link.to_json
+    end
+
+    post '/links' do
+      content_type :json
+
+      request.body.rewind
+      json_req = JSON.parse(request.body.read)
+      link = json_req['link'].map { |links| Link.create_new_link(links) }
+
+      Link.transaction do
+        link.each(&:save!).to_json
+      end
     end
   end
 end
