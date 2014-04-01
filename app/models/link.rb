@@ -6,4 +6,8 @@ class Link < ActiveRecord::Base
     link.viewed = params['viewed']
     link
   end
+
+  def href
+    "#{ENV['URL']}/#{uri_hash}"
+  end
 end
