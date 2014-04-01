@@ -41,15 +41,20 @@ module Shortened
 
       request.body.rewind
       json_req = JSON.parse(request.body.read)
-      link = json_req['links'].map { |new_link| Link.create_new_link(new_link) }
+      links = json_req['links'].map { |new_link| Link.create_new_link(new_link) }
 
       Link.transaction do
-        status 201
-        headers "Location" => link[0].href
-        { "links" => link.each(&:save!)}.to_json(except: [:created_at,
-                                                          :uri_hash,
-                                                          :updated_at],
-                                                methods: [:href])
+        begin
+          status 201
+          saved_links = links.each(&:save!)
+          headers "Location" => "links?ids=#{saved_links.map(&:id).join(',')}"
+          { "links" => saved_links}.to_json(except: [:created_at,
+                                                     :uri_hash,
+                                                     :updated_at],
+                                            methods: [:href])
+        rescue Exception => e
+          status 400
+        end
       end
     end
   end
