@@ -30,7 +30,10 @@ module Shortened
 
     get '/' do
       @link = Link.all
-      { "links" => @link}.to_json(except: [:created_at])
+      { "links" => @link}.to_json(except: [:created_at,
+                                           :uri_hash,
+                                           :updated_at],
+                                  methods: [:href])
     end
 
     post '/links' do
@@ -41,7 +44,10 @@ module Shortened
       link = json_req['links'].map { |links| Link.create_new_link(links) }
 
       Link.transaction do
-        link.each(&:save!).to_json
+        { "links" => link.each(&:save!)}.to_json(except: [:created_at,
+                                                          :uri_hash,
+                                                          :updated_at],
+                                                methods: [:href])
       end
     end
   end
