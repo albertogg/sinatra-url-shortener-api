@@ -44,6 +44,8 @@ module Shortened
       link = json_req['links'].map { |new_link| Link.create_new_link(new_link) }
 
       Link.transaction do
+        status 201
+        headers "Location" => link[0].href
         { "links" => link.each(&:save!)}.to_json(except: [:created_at,
                                                           :uri_hash,
                                                           :updated_at],
