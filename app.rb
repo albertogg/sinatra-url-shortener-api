@@ -30,7 +30,7 @@ module Shortened
 
     get '/' do
       @link = Link.all
-      @link.to_json
+      { "links" => @link}.to_json(except: [:created_at])
     end
 
     post '/links' do
