@@ -1,6 +1,2 @@
-module Shortened
-  module Models
-    class Link < ActiveRecord::Base
-    end
-  end
+class Link < ActiveRecord::Base
 end
