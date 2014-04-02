@@ -3,11 +3,10 @@ module Routes
     module V1
       class Links < Base
         get '/v1/links' do
-          @link = Link.all
-          { "links" => @link}.to_json(except: [:created_at,
-                                               :uri_hash,
-                                               :updated_at],
-                                      methods: [:href])
+          { "links" => Link.by_ids(params[:ids])}.to_json(except: [:created_at,
+                                                                   :uri_hash,
+                                                                   :updated_at],
+                                                          methods: [:href])
         end
 
         post '/v1/links' do
@@ -28,6 +27,7 @@ module Routes
                                                 methods: [:href])
             rescue Exception => e
               status 400
+              e
             end
           end
         end
