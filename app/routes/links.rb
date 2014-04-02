@@ -2,6 +2,10 @@ module Routes
   module Api
     module V1
       class Links < Base
+        before do
+          content_type :json
+        end
+
         get '/' do
           { "links" => Link.by_ids(params[:ids])}.to_json(except: [:created_at,
                                                                    :uri_hash,
@@ -10,14 +14,10 @@ module Routes
         end
 
         get '/:uri_hash' do
-          content_type :json
-
           { "links" => Link.by_uri_hash(params[:uri_hash])}.to_json(except: :id)
         end
 
         post '/' do
-          content_type :json
-
           request.body.rewind
           json_req = JSON.parse(request.body.read)
           links = json_req['links'].map { |new_link| Link.create_new_link(new_link) }
