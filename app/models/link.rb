@@ -1,4 +1,12 @@
 class Link < ActiveRecord::Base
+  def self.by_ids(params)
+    if params.present?
+      where(id: params.split(','))
+    else
+      all
+    end
+  end
+
   def self.create_new_link(params)
     link = Link.new
     link.uri = params['uri']
