@@ -1,6 +1,8 @@
 class Link < ActiveRecord::Base
   before_create :set_uri_hash, :set_views_to_zero
 
+  scope :by_uri_hash, -> params { select(:uri).where(uri_hash: params) }
+
   def self.by_ids(params)
     if params.present?
       where(id: params.split(','))
