@@ -2,14 +2,20 @@ module Routes
   module Api
     module V1
       class Links < Base
-        get '/v1/links' do
+        get '/' do
           { "links" => Link.by_ids(params[:ids])}.to_json(except: [:created_at,
                                                                    :uri_hash,
                                                                    :updated_at],
                                                           methods: [:href])
         end
 
-        post '/v1/links' do
+        get '/:uri_hash' do
+          content_type :json
+
+          { "links" => Link.by_uri_hash(params[:uri_hash])}.to_json(except: :id)
+        end
+
+        post '/' do
           content_type :json
 
           request.body.rewind
