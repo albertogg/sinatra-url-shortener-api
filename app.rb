@@ -30,6 +30,6 @@ module Shortened
       }
     end
 
-    use Links
+    use Routes::Api::V1::Links
   end
 end
