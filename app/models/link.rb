@@ -1,6 +1,7 @@
 class Link < ActiveRecord::Base
   before_create :set_uri_hash
 
+  validates :uri, presence: true
 
   scope :by_uri_hash, -> params { select(:uri).where(uri_hash: params) }
 

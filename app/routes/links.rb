@@ -31,9 +31,9 @@ module Routes
                                                          :uri_hash,
                                                          :updated_at],
                                                 methods: [:href])
-            rescue Exception => e
+            rescue ActiveRecord::RecordInvalid => invalid
               status 400
-              e
+              { :error => invalid.record.errors }.to_json
             end
           end
         end
