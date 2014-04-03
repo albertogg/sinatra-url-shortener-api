@@ -1,5 +1,6 @@
 class Link < ActiveRecord::Base
-  before_create :set_uri_hash, :set_views_to_zero
+  before_create :set_uri_hash
+
 
   scope :by_uri_hash, -> params { select(:uri).where(uri_hash: params) }
 
@@ -23,9 +24,5 @@ class Link < ActiveRecord::Base
 
   def set_uri_hash
     self.uri_hash = rand(36**5).to_s(36)
-  end
-
-  def set_views_to_zero
-    self.viewed = 0
   end
 end

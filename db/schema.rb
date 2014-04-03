@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331052044) do
+ActiveRecord::Schema.define(version: 20140403223637) do
 
   create_table "links", force: true do |t|
     t.string   "uri"
     t.string   "uri_hash"
-    t.integer  "viewed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
