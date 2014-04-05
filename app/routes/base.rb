@@ -6,4 +6,8 @@ class Base < Sinatra::Application
     disable :protection
     disable :static
   end
+
+  before do
+    $host_port = request.host_with_port
+  end
 end
