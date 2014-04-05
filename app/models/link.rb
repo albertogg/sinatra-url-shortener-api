@@ -20,7 +20,7 @@ class Link < ActiveRecord::Base
   end
 
   def href
-    "#{ENV['URL']}/#{uri_hash}"
+    "http://#{$host_port}/#{uri_hash}"
   end
 
   def set_uri_hash
