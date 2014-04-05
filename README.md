@@ -68,7 +68,8 @@ As you can see the response returns the "correnct" HTTP response and a Location 
 You can also request for multiple custom `ids`:
 
 ```sh
-$ curl --request GET -i http://localhost:3000/?ids=1,5HTTP/1.1 200 OK
+$ curl --request GET -i http://localhost:3000/?ids=1,5
+HTTP/1.1 200 OK
 Content-Type: application/json;charset=utf-8
 Content-Length: 174
 X-Content-Type-Options: nosniff
