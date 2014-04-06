@@ -3,7 +3,13 @@ class Link < ActiveRecord::Base
 
   validates :uri, presence: true
 
-  scope :by_uri_hash, -> params { select(:uri).where(uri_hash: params) }
+  def self.search_by(params)
+    if params.is_number?
+      select(:uri, :uri_hash).where(id: params)
+    else
+      select(:uri, :uri_hash).where(uri_hash: params)
+    end
+  end
 
   def self.by_ids(params)
     if params.present?

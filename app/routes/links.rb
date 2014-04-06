@@ -13,8 +13,10 @@ module Routes
                                                           methods: [:href])
         end
 
-        get '/:uri_hash' do
-          { "links" => Link.by_uri_hash(params[:uri_hash])}.to_json(except: :id)
+        get '/:search' do
+          { "links" => Link.search_by(params[:search])}.to_json(except: [:id,
+                                                                        :uri_hash],
+                                                               methods: [:href])
         end
 
         post '/' do
