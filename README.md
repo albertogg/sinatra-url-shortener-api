@@ -54,7 +54,7 @@ You can shorten a URL by sending a POST request like this:
 $ curl -i -X POST -H "Accept: application/json" -d '{"links": [{"uri": "http://twitter.com/albertogg"}, {"uri": "http://something.com"}]}' "http://localhost:3000/"
 HTTP/1.1 201 Created
 Content-Type: application/json;charset=utf-8
-Location: http://localhost:3000/links?ids=5,6
+Location: http://localhost:3000/?ids=5,6
 Content-Length: 169
 X-Content-Type-Options: nosniff
 Server: WEBrick/1.3.1 (Ruby/2.0.0/2014-02-24)

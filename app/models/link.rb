@@ -32,4 +32,13 @@ class Link < ActiveRecord::Base
   def set_uri_hash
     self.uri_hash = rand(36**5).to_s(36)
   end
+
+  def self.return_header_location(params)
+    ids = params.map(&:id).join(',')
+    if ids.length > 2
+      "/?ids=#{ids}"
+    else
+      "/#{ids}"
+    end
+  end
 end

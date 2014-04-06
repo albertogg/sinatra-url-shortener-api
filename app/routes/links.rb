@@ -28,7 +28,7 @@ module Routes
             begin
               status 201
               saved_links = links.each(&:save!)
-              headers "Location" => "links?ids=#{saved_links.map(&:id).join(',')}"
+              headers "Location" => Link.return_header_location(saved_links)
               { "links" => saved_links}.to_json(except: [:created_at,
                                                          :uri_hash,
                                                          :updated_at],
