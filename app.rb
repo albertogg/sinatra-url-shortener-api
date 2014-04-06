@@ -3,6 +3,7 @@ require 'bundler'
 
 Bundler.require
 $: << File.expand_path('../', __FILE__)
+$: << File.expand_path('../lib', __FILE__)
 
 require 'dotenv'
 Dotenv.load
@@ -11,6 +12,7 @@ require 'sinatra/base'
 require 'sinatra/reloader' if development? # sinatra-contrib
 require 'sinatra/activerecord'
 
+require 'lib/core_ext/string'
 require 'app/models/link'
 require 'app/routes/base'
 require 'app/routes/links'
