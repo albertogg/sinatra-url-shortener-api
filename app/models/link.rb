@@ -41,4 +41,14 @@ class Link < ActiveRecord::Base
       "/#{ids}"
     end
   end
+
+  def self.save_received_request(links)
+    transaction do
+      begin
+        { links: links.each(&:save!) }
+      rescue ActiveRecord::RecordInvalid => invalid
+        { error: invalid.record.errors }
+      end
+    end
+  end
 end
