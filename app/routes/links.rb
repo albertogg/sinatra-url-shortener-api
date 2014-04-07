@@ -25,7 +25,7 @@ module Routes
 
           saved_links = Link.save_received_request(links)
           if saved_links.has_key?(:error)
-            status 400
+            status 422
             saved_links.to_json
           else
             status 201
