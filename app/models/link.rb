@@ -34,7 +34,7 @@ class Link < ActiveRecord::Base
   end
 
   def self.return_header_location(params)
-    ids = params.map(&:id).join(',')
+    ids = params[:links].map(&:id).join(',')
     if ids.length > 2
       "/?ids=#{ids}"
     else
