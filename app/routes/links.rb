@@ -7,15 +7,14 @@ module Routes
         end
 
         get '/' do
-          { "links" => Link.by_ids(params[:ids])}.to_json(except: [:created_at,
-                                                                   :uri_hash,
-                                                                   :updated_at],
-                                                          methods: [:href])
+          { links: Link.by_ids(params[:ids])}.to_json(except: [:created_at,
+                                                               :uri_hash,
+                                                               :updated_at],
+                                                     methods: [:href])
         end
 
         get '/:search' do
-          { "links" => Link.search_by(params[:search])}.to_json(except: [:id,
-                                                                        :uri_hash],
+          { links: Link.search_by(params[:search])}.to_json(except: [:uri_hash],
                                                                methods: [:href])
         end
 

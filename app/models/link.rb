@@ -5,9 +5,9 @@ class Link < ActiveRecord::Base
 
   def self.search_by(params)
     if params.is_number?
-      select(:uri, :uri_hash).where(id: params)
+      select(:id, :uri, :uri_hash).where(id: params)
     else
-      select(:uri, :uri_hash).where(uri_hash: params)
+      select(:id, :uri, :uri_hash).where(uri_hash: params)
     end
   end
 
